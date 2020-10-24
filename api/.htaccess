@@ -1,0 +1,13 @@
+## Rewrite
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+##API Endpoints Rewrite
+##Fridges
+RewriteRule ^fridges/all/?$ fridges.php?action=all [L]
+RewriteRule ^fridges/byid/(.+)/?$ fridges.php?action=byid&id=$1 [L]
+
+##Inventory
+RewriteRule ^inventory/list/(.+)/?$ inventory.php?action=list&id=$1 [L]
+RewriteRule ^inventory/put/(.+)/?$ inventory.php?action=put&id=$1 [L]
+RewriteRule ^inventory/delete/(.+)/?$ inventory.php?action=delete&id=$1 [L]

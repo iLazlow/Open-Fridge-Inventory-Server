@@ -1,0 +1,1 @@
+<img src="qr.php" width="512" height="512" />
