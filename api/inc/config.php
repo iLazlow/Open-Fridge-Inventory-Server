@@ -65,4 +65,16 @@ function getBearerToken() {
 	}
 	return null;
 }
+
+$arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer" => false,
+        "verify_peer_name" => false,
+    ),
+	'http' => array(
+		'header' => 'Connection: close\r\nHost: www.google.com\r\n',
+		'timeout' => .5
+	),
+); 
+
 ?>

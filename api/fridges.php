@@ -5,17 +5,6 @@ header("Access-Control-Allow-Headers: *");
 
 include("inc/config.php");
 
-$arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer" => false,
-        "verify_peer_name" => false,
-    ),
-	'http' => array(
-		'header' => 'Connection: close\r\nHost: www.google.com\r\n',
-		'timeout' => .5
-	),
-); 
-
 if($apikey){
 	$row = $con->query("SELECT * FROM api_keys WHERE api_key = '$apikey'")->fetch_assoc();
 	

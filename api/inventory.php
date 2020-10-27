@@ -5,17 +5,6 @@ header("Access-Control-Allow-Headers: *");
 
 include("inc/config.php");
 
-$arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer" => false,
-        "verify_peer_name" => false,
-    ),
-	'http' => array(
-		'header' => 'Connection: close\r\nHost: www.google.com\r\n',
-		'timeout' => 5
-	),
-); 
-
 if($apikey){
 	$row = $con->query("SELECT * FROM api_keys WHERE api_key = '$apikey'")->fetch_assoc();
 	
@@ -39,7 +28,7 @@ if($apikey){
 		}elseif($action == "put"){
 			if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 				$putdata = json_decode(file_get_contents("php://input"), true);
-				$ean = $putdata["ean"];
+				$ean = protect($putdata["ean"]);
 				
 				if($ean != ""){
 					$row = $con->query("SELECT * FROM inventory WHERE ean = '$ean' AND fridge='$id'")->fetch_assoc();
@@ -81,7 +70,7 @@ if($apikey){
 		}elseif($action == "delete"){
 			if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 				$putdata = json_decode(file_get_contents("php://input"), true);
-				$ean = $putdata["ean"];
+				$ean = protect($putdata["ean"]);
 				
 				if($ean != ""){
 					$row = $con->query("SELECT * FROM inventory WHERE ean = '$ean' AND fridge='$id'")->fetch_assoc();
